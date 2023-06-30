@@ -1,0 +1,39 @@
+{% comment %}
+  New ATC at the bottom of the product in the product grid
+  https://foundrybrands.atlassian.net/browse/EC-219
+  Product Add to Cart text button.
+  The button appears at bottom of flex box `grid-item__content` via css.
+{% endcomment %}
+
+<div class="grid-product__actions_add_to_cart">
+  {%- if product.variants.size > 1 -%}
+    <button
+      type="button"
+      class="text-link quick-add-btn js-quick-add-form js-modal-open-quick-add"
+      title="{{ 'products.product.add_to_cart' | t }}"
+      tabindex="-1"
+    >
+      <span class="btn btn-collection{% comment %}btn--circle btn--icon{% endcomment %}"> OPTIONS </span>
+    </button>
+  {%- else -%}
+    <!-- add to cart click event DL functionality -->
+    <button
+      type="button"
+      class="text-link quick-add-btn js-quick-add-btn {% unless product.available %} btn-atc-sold-out {% endunless %}"
+      title="{{ 'products.product.add_to_cart' | t }}"
+      tabindex="-1"
+      data-id="{{ product.selected_or_first_available_variant.id }}"
+      {% if product.requires_selling_plan %}
+        data-subscription-id="{{ product.selling_plan_groups[0].selling_plans[0].id }}"
+      {% endif %}
+    >
+      <span class="btn btn-collection {% unless product.available %} btn-atc-sold-out {% endunless %}">
+        {% if product.available %}
+          ADD TO CART
+        {% else %}
+          SOLD OUT
+        {% endif %}
+      </span>
+    </button>
+  {%- endif -%}
+</div>

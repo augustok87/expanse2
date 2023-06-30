@@ -1,0 +1,367 @@
+{
+  "sections": {
+    /*
+    https://foundrybrands.atlassian.net/browse/EC-304
+    custom-homepage-hero: New Desktop/Mobile Banner Image, instead of using Carousel.
+    */
+    "custom-homepage-hero": {
+      "type": "custom-homepage-hero"
+    },
+    "slideshow-split": {
+      "type": "slideshow-split",
+      "blocks": {
+        "slideshow-split-0": {
+          "type": "slide",
+          "settings": {
+            "title_size": 60,
+            "text_position": "right",
+            "indent_image": false,
+            "color_scheme": "1"
+          }
+        },
+        "slideshow-split-1": {
+          "type": "slide",
+          "settings": {
+            "title_size": 60,
+            "text_position": "left",
+            "indent_image": false,
+            "color_scheme": "2"
+          }
+        }
+      },
+      "block_order": [
+        "slideshow-split-0",
+        "slideshow-split-1"
+      ],
+      "settings": {
+        "full_width": true,
+        "height": 600,
+        "height_mobile": 450,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 7
+      }
+    },
+    "featured-collections": {
+      "type": "featured-collections",
+      "blocks": {
+        "featured-collections-0": {
+          "type": "collection",
+          "settings": {
+          }
+        },
+        "featured-collections-1": {
+          "type": "collection",
+          "settings": {
+          }
+        },
+        "featured-collections-2": {
+          "type": "collection",
+          "settings": {
+          }
+        },
+        "featured-collections-3": {
+          "type": "collection",
+          "settings": {
+          }
+        },
+        "featured-collections-4": {
+          "type": "collection",
+          "settings": {
+          }
+        },
+        "featured-collections-5": {
+          "type": "collection",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "featured-collections-0",
+        "featured-collections-1",
+        "featured-collections-2",
+        "featured-collections-3",
+        "featured-collections-4",
+        "featured-collections-5"
+      ],
+      "settings": {
+        "divider": false
+      }
+    },
+    "promo-grid": {
+      "type": "promo-grid",
+      "blocks": {
+        "promo-grid-1": {
+          "type": "sale_collection",
+          "settings": {
+            "width": "50",
+            "color_scheme": "3"
+          }
+        },
+        "promo-grid-2": {
+          "type": "sale_collection",
+          "settings": {
+            "width": "50",
+            "color_scheme": "3"
+          }
+        }
+      },
+      "block_order": [
+        "promo-grid-1",
+        "promo-grid-2"
+      ],
+      "settings": {
+        "full_width": false,
+        "gutter_size": 20,
+        "space_above": false,
+        "space_below": false
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "count": 5,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "divider": false
+      }
+    },
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slideshow-0": {
+          "type": "hero",
+          "settings": {
+            "title_size": 56,
+            "color_accent": "#ffffff",
+            "text_align": "vertical-center horizontal-center",
+            "overlay_opacity": 0
+          }
+        },
+        "slideshow-1": {
+          "type": "hero",
+          "settings": {
+            "title_size": 55,
+            "color_accent": "#ffffff",
+            "text_align": "vertical-center horizontal-center",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "slideshow-0",
+        "slideshow-1"
+      ],
+      "settings": {
+        "full_width": true,
+        "desktop_size": -10,
+        "mobile_size": 0,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "featured-collection2": {
+      "type": "featured-collection",
+      "settings": {
+        "count": 5,
+        "mobile_scrollable": false,
+        "view_all": true,
+        "divider": false
+      }
+    },
+    "promo-grid2": {
+      "type": "promo-grid",
+      "blocks": {
+        "promo-grid-2-0": {
+          "type": "banner",
+          "settings": {
+            "color_scheme": "2"
+          }
+        },
+        "promo-grid-2-1": {
+          "type": "product",
+          "settings": {
+            "enable_price": true,
+            "width": "50",
+            "color_scheme": "1"
+          }
+        },
+        "promo-grid-2-2": {
+          "type": "product",
+          "settings": {
+            "enable_price": true,
+            "width": "50",
+            "color_scheme": "1"
+          }
+        }
+      },
+      "block_order": [
+        "promo-grid-2-0",
+        "promo-grid-2-1",
+        "promo-grid-2-2"
+      ],
+      "settings": {
+        "full_width": false,
+        "gutter_size": 20,
+        "space_above": false,
+        "space_below": false
+      }
+    },
+    "logo-list": {
+      "type": "logo-list",
+      "blocks": {
+        "logo-list-0": {
+          "type": "logo_image",
+          "settings": {
+          }
+        },
+        "logo-list-1": {
+          "type": "logo_image",
+          "settings": {
+          }
+        },
+        "logo-list-2": {
+          "type": "logo_image",
+          "settings": {
+          }
+        },
+        "logo-list-3": {
+          "type": "logo_image",
+          "settings": {
+          }
+        },
+        "logo-list-4": {
+          "type": "logo_image",
+          "settings": {
+          }
+        },
+        "logo-list-5": {
+          "type": "logo_image",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "logo-list-0",
+        "logo-list-1",
+        "logo-list-2",
+        "logo-list-3",
+        "logo-list-4",
+        "logo-list-5"
+      ],
+      "settings": {
+        "title": "Popular brands",
+        "divider": false
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+          }
+        },
+        "form": {
+          "type": "form",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "text",
+        "form"
+      ],
+      "settings": {
+        "color_scheme": "2"
+      }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "settings": {
+        "title": "From the journal",
+        "blog": "news",
+        "blog_show_tags": true,
+        "blog_show_date": false,
+        "blog_show_comments": false,
+        "blog_show_author": false,
+        "blog_image_size": "wide",
+        "divider": false
+      }
+    },
+    "slideshow-split2": {
+      "type": "slideshow-split",
+      "blocks": {
+        "slideshow-split2-0": {
+          "type": "slide",
+          "settings": {
+            "title_size": 45,
+            "link_text_2": "",
+            "text_position": "left",
+            "indent_image": false,
+            "color_scheme": "1"
+          }
+        }
+      },
+      "block_order": [
+        "slideshow-split2-0"
+      ],
+      "settings": {
+        "full_width": true,
+        "height": 550,
+        "height_mobile": 450,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 7
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "color_scheme": "3"
+      }
+    }
+  },
+  "order": [
+    /*
+    https://foundrybrands.atlassian.net/browse/EC-304
+    custom-homepage-hero: New Desktop/Mobile Banner Image, instead of using Carousel.
+    */
+    "custom-homepage-hero",
+    "slideshow-split",
+    "featured-collections",
+    "promo-grid",
+    "featured-collection",
+    "slideshow",
+    "featured-collection2",
+    "promo-grid2",
+    "logo-list",
+    "newsletter",
+    "blog-posts",
+    "slideshow-split2",
+    "rich-text"
+  ]
+}

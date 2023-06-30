@@ -1,0 +1,202 @@
+{%- liquid
+  unless limit
+    assign limit = main_menu.links.size
+  endunless
+  unless offset
+    assign offset = 0
+  endunless
+-%}
+
+<ul class="site-nav site-navigation site-navigation--{{ nav_position }} small--hide" role="navigation">
+  {%- for link in main_menu.links limit: limit offset: offset -%}
+    {%- liquid
+      assign has_dropdown = false
+      assign is_megamenu = false
+      if link.levels > 0
+        assign has_dropdown = true
+        if link.levels > 1
+          assign is_megamenu = true
+        endif
+      endif
+
+      assign isCollection = false
+      if show_mega_products
+        if is_megamenu and link.url contains '/collections/'
+          assign lang_code_string = request.locale.iso_code | prepend: '/' | downcase
+          assign collection_handle = link.url | remove: '/collections/' | remove: lang_code_string
+          assign collection_drop = collections[collection_handle]
+          assign isCollection = true
+        endif
+      endif
+    -%}
+
+    <li
+      class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown link-for-dropdown-menu{% endif %}{% if is_megamenu %} site-nav--is-megamenu link-for-dropdown-menu{% endif %}"
+      {% if has_dropdown %}aria-haspopup="true"{% endif %}>
+
+      <a href="{{ link.url }}" 
+         data-item-name="{{ link.title }}" 
+         data-item-type="main-nav"  
+         data-item-position="{{ forloop.index }}" 
+         class="site-nav__link site-nav__link--underline
+                {% if has_dropdown %} site-nav__link--has-dropdown{% endif %} 
+                {% if link.active %}
+                  link-active
+                {% endif %}
+                {% for childlink in link.links %}
+                  {% if childlink.active %} link-active {% endif %}
+                  {%- for grandchildlink in childlink.links -%}
+                    {% if grandchildlink.active %} link-active {% endif %}
+                  {% endfor %}
+                {% endfor %}"
+        >
+      {%- comment -%} EC-300: Dropdown indicator icon - https://foundrybrands.atlassian.net/browse/EC-300 {% endcomment %}
+        {{ link.title }} {%- if is_megamenu or has_dropdown -%} &nbsp; ▿ {% endif %}
+      {%- comment -%} End of EC-300 {%- endcomment -%}
+      </a>
+      {%- if is_megamenu -%}
+        {%- assign previous_column_type = '' -%}
+        <div class="site-nav__dropdown megamenu text-left is-dropdown-menu">
+          <div class="page-width">
+            <div class="site-nav__dropdown-animate megamenu__wrapper">
+              <div class="megamenu__cols">
+                <div class="megamenu__col">
+                  {%- for childlink in link.links -%}
+                    {%- liquid
+                      assign create_new_column = false
+
+                      if childlink.levels > 0 and forloop.index != 1
+                        assign create_new_column = true
+                      endif
+
+                      if childlink.levels == 0 and previous_column_type == 'full'
+                        assign create_new_column = true
+                      endif
+                    -%}
+
+                    {%- if create_new_column -%}
+                      </div><div class="megamenu__col">
+                    {%- endif -%}
+
+                    {%- if section.settings.allow_collection_image -%}
+                      {%- if childlink.levels > 0 and childlink.url contains '/collections/' -%}
+                        {%- if collections[childlink.object.handle].image != blank -%}
+                          <a
+                            href="{{ childlink.url }}"
+                            class="megamenu__collection-image"
+                            aria-label="{{ collections[childlink.object.handle].title }}"
+                            style="background-image: url({{ childlink.object.image | image_url: width: 400 }})"></a>
+                          <a>
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- endif -%}
+
+                    <div class="megamenu__col-title">
+                      <a href="{{ childlink.url }}" data-item-name="{{ childlink.title }}" data-item-type="main-nav"  data-item-position="{{ forloop.index }}" class="site-nav__dropdown-link site-nav__dropdown-link--top-level">{{ childlink.title }}</a>
+                    </div>
+
+                    {%- liquid
+                      if childlink.levels > 0
+                        assign previous_column_type = 'full'
+                      else
+                        assign previous_column_type = 'single'
+                      endif
+                    -%}
+
+                    {%- for grandchildlink in childlink.links -%}
+                      <a href="{{ grandchildlink.url }}" data-item-name="{{ grandchildlink.title }}" data-item-type="main-nav"  data-item-position="{{ forloop.index }}" class="site-nav__dropdown-link {% if grandchildlink.active %} link-active {% endif %}">
+                        {% comment %} Start change related to EC-544 {% endcomment %}
+                        {{ grandchildlink.title }}
+                        {% comment %} End change related to EC-544 {% endcomment %}
+                      </a>
+                    {%- endfor -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+              {% if section.settings.allow_megamenu_featured_product %}
+              {%- if isCollection -%}
+                <div class="megamenu__featured">
+                  <div class="product-grid">
+                    {%- liquid
+                      assign mega_product = collection_drop.products.first
+                      render 'product-grid-item', product: mega_product
+
+                      if settings.quick_shop_enable
+                        render 'quick-shop-modal', product: mega_product
+                      endif
+                    -%}
+                  </div>
+                </div>
+              {%- endif -%}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- elsif has_dropdown -%}
+        <div class="site-nav__dropdown is-dropdown-menu">
+          <ul class="site-nav__dropdown-animate site-nav__dropdown-list text-left">
+            {%- for childlink in link.links -%}
+              {%- liquid
+                assign has_sub_dropdown = false
+                if childlink.levels > 0
+                  assign has_sub_dropdown = true
+                endif
+              -%}
+
+              <li class="{% if has_sub_dropdown %} site-nav__deep-dropdown-trigger{% endif %}">
+                <a href="{{ childlink.url }}" data-item-name="{{ childlink.title }}" data-item-type="{{ section.settings.main_menu_alignment }}" class="site-nav__dropdown-link site-nav__dropdown-link--second-level{% if has_sub_dropdown %} site-nav__dropdown-link--has-children{% endif %} {% if childlink.active %} link-active {% endif %}">
+                  {{ childlink.title | escape }}
+                  {%- if has_sub_dropdown -%}
+                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="m1.57 1.59 12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none"/></svg>
+                  {%- endif -%}
+                </a>
+                {%- if has_sub_dropdown -%}
+                  <ul class="site-nav__deep-dropdown">
+                    {%- for grandchildlink in childlink.links -%}
+                      <li>
+                        <a href="{{ grandchildlink.url }}" data-item-name="{{ grandchildlink.title }}" data-item-type="{{ section.settings.main_menu_alignment }}" class="site-nav__dropdown-link {% if grandchildlink.active %} link-active {% endif %}">{{ grandchildlink.title | escape }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+</ul>
+
+<style>
+/* 
+  Customize active link color by admin user
+  https://foundrybrands.atlassian.net/browse/EC-300 
+*/
+.link-active {
+  background-color: {{ section.settings.active_link_color }}
+}
+/* End of EC-300 */
+/* Start of EC-544: Megamenu collection image */
+.megamenu__collection-image {
+  display :block;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  height: 0;
+  padding-bottom: 46%;
+  margin-bottom: 20px;
+}
+.megamenu__cols .megamenu__col {
+  page-break-inside: auto;
+  break-inside: auto;
+}
+.megamenu .megamenu__wrapper {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 15px auto;
+}
+/* End of EC-544 */
+
+</style>

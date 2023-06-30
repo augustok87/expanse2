@@ -1,0 +1,88 @@
+{% comment %} 
+https://foundrybrands.atlassian.net/browse/EC-304
+New Desktop/Mobile Banner Image, instead of using Carousel.
+
+It automatically switches from desktop to mobile images, back and forth once passed the threshold of 768 pixels.
+{% endcomment %}
+
+<div>
+  <a
+    href="{{ section.settings.hero_image_link }}"
+  >
+    {% if section.settings.hero_image_desktop %}
+      <img
+        class="hero__image hero__image_desktop"
+        src="{{ section.settings.hero_image_desktop | image_url: width: 2048 }}"
+        alt="{{ section.settings.hero_image_alt }}"
+        loading="lazy"
+        width="auto"
+        height="auto"
+      >
+    {% endif %}
+  </a>
+  <a
+    href="{{ section.settings.hero_image_link }}"
+  >
+    {% if section.settings.hero_image_mobile %}
+      <img
+        class="hero__image hero__image_mobile"
+        src="{{ section.settings.hero_image_mobile | image_url: width: 768 }}"
+        alt="{{ section.settings.hero_image_alt }}"
+        loading="lazy"
+        width="auto"
+        height="auto"
+      >
+    {% endif %}
+  </a>
+</div>
+
+<style>
+  @media screen and (max-width:768px){
+    .hero__image_desktop {
+      display: none;
+    }
+    .hero__image_mobile {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width:769px){
+    .hero__image_mobile {
+      display: none;
+    }
+    .hero__image_desktop {
+      display: block;
+      height: 88vh;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "homepage-hero-image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image_desktop",
+      "label": "Desktop Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Mobile Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Alt message for Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_link",
+      "label": "Hero Image Link"
+    }
+  ],
+  "blocks": [],
+  "presets": []
+}
+{% endschema %}

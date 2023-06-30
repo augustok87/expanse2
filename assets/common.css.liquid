@@ -1,0 +1,142 @@
+/*
+ Common CSS across all brands should go here, rather than in the custom-theme.css.liquid file.
+*/
+
+:root {
+  --button-custom-hover-color: {{ settings.button_hover_color }};
+}
+
+
+/* ATC Button
+  Jira : https://foundrybrands.atlassian.net/jira/software/c/projects/EC/boards/64?modal=detail&selectedIssue=EC-219
+*/
+
+.grid-item.grid-product .grid-item__content {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.grid-product__actions_add_to_cart {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-right: var(--productTileMargin);
+  padding-top: 1rem;
+}
+
+.btn-collection {
+  border-radius: 30px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  line-height: 1rem;
+}
+
+.btn-collection:hover {
+  background-color: {{ settings.button_hover_color }};
+  transition: 0.2s;
+}
+
+/* END Add to Cart button */
+
+
+/* EC-271: Thumbnails scroller at product page */
+.btn_thumbs_scroll {
+  width: 50px;
+  height: 35px;
+  position: relative;
+  background-color: #FFF;
+  opacity: 1;
+  left: 15px;
+  transition: all .2s ease-in-out;
+  padding: 10px;
+}
+
+.btn_thumbs_scroll_down:hover, .btn_thumbs_scroll_up:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  background: #FFF;
+  color: #000;
+  background-color: #FFF;
+}
+
+.scroll_down_svg {
+  opacity: 1 !important;
+}
+
+.scroll_up_svg {
+  opacity: 1 !important;
+  transform: rotate(180deg);
+}
+/* End of EC-271 */
+
+/* 
+Navigation Location Color Customization + Intelligent Hover System
+https://foundrybrands.atlassian.net/browse/EC-300
+
+Bug fix on same issue >>>
+https://foundrybrands.atlassian.net/browse/EC-379
+*/
+.link-active {
+  padding: 8px 10px;
+  color: white;
+  padding: 8px 12px !important;
+}
+
+.site-nav__link, .site-nav__dropdown, .site-nav__dropdown-animate, .site-nav__dropdown-link, .site-nav--has-dropdown.is-focused>a {
+  transition: all;
+  transition-delay: 300ms !important;
+}
+
+.site-nav--has-dropdown:hover .site-nav__dropdown{
+  visibility:visible
+}
+
+.is-focused .site-nav__dropdown-animate, .site-nav--has-dropdown:hover .site-nav__dropdown-animate{
+  opacity:1;
+}
+
+.site-nav--has-dropdown:hover>a {
+  color:{{ settings.color_body_text | default: "#1c1d1d" }} !important;
+  opacity:1;
+  transition: all;
+  transition-delay: 300ms !important;
+}
+/* 
+.site-nav--has-dropdown.is-focused>a,.site-nav--has-dropdown:hover>a{
+  color:{{ settings.color_body_text | default: "#1c1d1d" }} !important;
+  color:var(--colorTextBody) !important;
+  background-color:{{ settings.color_body_bg | default: "#fff" }};
+  background-color:var(--colorBody);
+  opacity:1;
+  transition:none;
+} */
+
+/* End of EC-300 and EC-379 */
+
+.site-nav__link {
+  padding: 8px 12px;
+}
+
+.btn-atc-sold-out {
+  border-radius: 30px;
+  background-color: lightgray;
+  pointer-events: none;
+}
+
+/* Desktop Navbar Menu fix: https://foundrybrands.atlassian.net/browse/EC-575 */
+
+.megamenu__cols{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.megamenu__col {
+  flex-basis: 25%;
+}
+
+/* End of https://foundrybrands.atlassian.net/browse/EC-575 */

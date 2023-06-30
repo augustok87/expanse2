@@ -1,0 +1,41 @@
+{
+  "type": "header",
+  "name": "t:sections.header-group.name",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "main_menu_link_list": "main-menu",
+        "main_menu_alignment": "left",
+        "header_sticky": true,
+        "sticky_index": false,
+        "sticky_collection": false
+      }
+    },
+    "toolbar": {
+      "type": "toolbar",
+      "blocks": {
+        "0b066516-effd-470b-ba3b-fc9f69d6c6ae": {
+          "type": "announcement",
+          "settings": {
+          }
+        },
+        "cff431d4-9a3a-4622-a731-bd2d4c67a45c": {
+          "type": "announcement",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "0b066516-effd-470b-ba3b-fc9f69d6c6ae",
+        "cff431d4-9a3a-4622-a731-bd2d4c67a45c"
+      ],
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "toolbar",
+    "header"
+  ]
+}

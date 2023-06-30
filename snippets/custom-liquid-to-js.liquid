@@ -1,0 +1,28 @@
+{% comment %}
+This will convert data from a [convertible] data object in liquid into data
+available to javascript. All data is available in the global [object] variable
+`FORGE_DATA`.
+
+Example:
+```
+ render 'custom-liquid-to-js', data: section.settings, data_key: 'my_settings'
+```
+
+The data from the `section.settings` object will now appear as an object in
+`FORGE_DATA.my_settings`.
+
+From there, any subsequent javascript can access that variable at run-time.
+{% endcomment %}
+
+{%liquid
+  unless data_key
+    assign data_key = 'data'
+  endunless
+  unless data
+    assign data = '{}'
+  endunless
+%}
+
+<script>
+  FORGE_UTILS.setForgeData("{{ data_key }}", {{ data | json }})
+</script>

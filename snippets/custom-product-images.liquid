@@ -1,0 +1,78 @@
+{% case block %}
+{% when 'buttons_html' %}
+  {%- comment -%} Buttons for scroller at product pages {%- endcomment -%}
+  <button class="btn_thumbs_scroll btn_thumbs_scroll_up">
+    <img src="{{ 'scroll_arrow.svg' | asset_url }}" 
+          alt="scroll-up-button"
+          class="scroll_up_svg"
+      >  
+  </button>
+  <button class="btn_thumbs_scroll btn_thumbs_scroll_down">
+    <img src="{{ 'scroll_arrow.svg' | asset_url }}" 
+          alt="scroll-down-button"
+          class="scroll_down_svg"
+        >
+  </button>
+  {%- comment -%} End of buttons for scroller at product pages {%- endcomment -%}
+
+{% when 'thumbnail_scroller' %}
+  {%- comment -%} 
+
+  Script for thumbnails scroller at product pages
+  Jira: https://foundrybrands.atlassian.net/browse/EC-271
+
+  {%- endcomment -%}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const thumbsContainer = document.querySelector('.product__thumbs--scroller')
+      const scrollDownButton = document.querySelector('.btn_thumbs_scroll_down')
+      const scrollUpButton = document.querySelector('.btn_thumbs_scroll_up')
+      const scrollerHeight = thumbsContainer.clientHeight
+      const buttonHeight = scrollDownButton.clientHeight
+
+      // Get the total sum of thumbnails heights
+      let sumHeightThumbs = 0
+      Array.from(
+        document.querySelectorAll(".product__thumb-item")
+      ).forEach((elem) => {
+          sumHeightThumbs += elem.clientHeight;
+      })
+
+      // Initial State
+      scrollDownButton.style.top = `${scrollerHeight - buttonHeight}px`
+      scrollUpButton.style.display = 'none'
+      scrollDownButton.style.display = sumHeightThumbs < thumbsContainer.clientHeight ? 'none' : 'block'
+
+      // Move the slider 300px up and down
+      // Could improve it by making it scroll in percentages. Might require lot more math...
+      scrollDownButton.addEventListener('click', () => {
+        thumbsContainer.scrollBy(0, 300);
+      })
+      scrollUpButton.addEventListener('click', () => {
+        thumbsContainer.scrollBy(0, -300);
+      })
+
+      // Place Buttons dinamically depending on "thumbsContainer.scrollTop" position
+      thumbsContainer.addEventListener('scroll', () => {
+        switch (thumbsContainer.scrollTop) {
+          // Scroller is at the top
+          case 0:
+            scrollUpButton.style.display = 'none',
+            scrollDownButton.style.top = `${scrollerHeight - buttonHeight}px`
+            break;
+          // Scroller is at the bottom
+          case (thumbsContainer.scrollHeight - thumbsContainer.clientHeight):
+            scrollDownButton.style.display = 'none';
+            break;
+          // Scroller is in-between
+          default:
+            scrollDownButton.style.display = 'block';
+            scrollUpButton.style.display = 'block',
+            scrollDownButton.style.top = `${scrollerHeight - buttonHeight - buttonHeight}px`
+            break;
+        }
+      })
+    })
+  </script>
+{% endcase %}

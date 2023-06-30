@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+      }
+    },
+    "build_a_bundle": {
+      "type": "custom-build-a-bundle",
+      "settings": {
+        "product_bundle_count": 3,
+        "bundle_collection": "bundleable",
+        "products_per_page": 10,
+        "show_total": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "build_a_bundle"
+  ]
+}

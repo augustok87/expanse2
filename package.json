@@ -1,0 +1,52 @@
+{
+  "name": "@forge/dev-bootstrap",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Dev Bootstrap theme with Expanse",
+  "author": "Foundry Brands",
+  "bugs": {
+    "url": "https://github.com/barrel/barrel-shopify/issues"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "run-p vite:serve shopify:serve",
+    "dev:sync": "vite:remove_assets && run-p vite:serve \"shopify:serve -- --theme-editor-sync\"",
+    "start": "cross-env NODE_ENV=production run-s vite:build shopify:serve",
+    "start:sync": "cross-env NODE_ENV=production run-s vite:build \"shopify:serve -- --theme-editor-sync\"",
+    "watch": "run-p vite:watch shopify:serve",
+    "watch:sync": "run-p vite:watch \"shopify:serve -- --theme-editor-sync\"",
+    "vite:build": "vite build",
+    "vite:serve": "run-p vite:remove_assets && vite",
+    "vite:watch": "run-p vite:remove_assets && cross-env VITE_WATCH=true vite build",
+    "vite:remove_assets": "rm -rf assets/vite-*",
+    "shopify:serve": "dotenv shopify theme dev",
+    "shopify:push": "dotenv shopify theme push --nodelete --ignore config/settings_data.json templates/*.json locales/*.json",
+    "shopify:push:new": "dotenv shopify theme push --unpublished",
+    "shopify:push:unsafe": "dotenv shopify theme push",
+    "shopify:pull": "dotenv shopify theme pull --nodelete",
+    "shopify:pull:content": "dotenv shopify theme pull --nodelete --only config/settings_data.json templates/*.json locales/*.json"
+  },
+  "dependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.3"
+  },
+  "devDependencies": {
+    "@shopify/cli": "^3.46.2",
+    "@shopify/theme": "^3.46.2",
+    "@sveltejs/vite-plugin-svelte": "^2.4.1",
+    "autoprefixer": "^10.4.14",
+    "cross-env": "^7.0.3",
+    "dotenv-cli": "^6.0.0",
+    "graphql": "^16.6.0",
+    "graphql-request": "^6.1.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.24",
+    "svelte": "^3.59.1",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.3.9",
+    "vite-plugin-shopify": "~1.0.2"
+  },
+  "engines": {
+    "node": ">= 16.14.2"
+  }
+}

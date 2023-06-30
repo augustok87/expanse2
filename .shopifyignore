@@ -1,0 +1,9 @@
+package.json
+postcss.config.js
+svelte.config.js
+tailwind.config.js
+vite.config.js
+frontend/
+modules/
+config/src/
+assets/manifest.json

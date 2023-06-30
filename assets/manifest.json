@@ -1,0 +1,14 @@
+{
+  "frontend/entrypoints/productBundleMain.css": {
+    "file": "vite-productBundleMain.css",
+    "src": "frontend/entrypoints/productBundleMain.css"
+  },
+  "frontend/entrypoints/productBundleMain.js": {
+    "css": [
+      "vite-productBundleMain.css"
+    ],
+    "file": "vite-productBundleMain.js",
+    "isEntry": true,
+    "src": "frontend/entrypoints/productBundleMain.js"
+  }
+}

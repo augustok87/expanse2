@@ -1,0 +1,43 @@
+{% render 'custom-liquid-to-js', data: section.settings, data_key: 'bundle_product_settings' %}
+
+<div id="product-bundle-app"></div>
+{% render 'vite-tag' with 'productBundleMain.js' %}
+
+{% schema %}
+{
+  "name": "Product Bundle",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "product_bundle_count",
+      "label": "Product bundle count",
+      "default": 3,
+      "min": 2,
+      "max": 6,
+      "step": 1
+    },
+    {
+      "type": "collection",
+      "id": "bundle_collection",
+      "label": "The collection that contains the bundleable products"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products to display per page",
+      "default": 10,
+      "min": 10,
+      "max": 100,
+      "step": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_total",
+      "label": "Show the running total",
+      "info": "Show the running total price of the bundle",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
